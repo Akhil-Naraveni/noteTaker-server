@@ -70,7 +70,7 @@ router.delete("/notes/:id", async(req, res) =>{
         const data = await Notes.deleteOne({_id : req.params.id})
         res.status(200).json({
             status: "success",
-            message : "note delted succesfully"
+            message : "note deleted succesfully"
         })
     } catch (e) {
         res.status(500).json({
@@ -91,6 +91,21 @@ router.put("/notes/:id", async(req, res) =>{
     } catch (e) {
         res.status(404).json({
             status:"failed",
+            message : e.message
+        })
+    }
+})
+
+router.delete("/notes", async(req, res) =>{
+    try {
+        const data = await Notes.deleteMany({})
+        res.status(200).json({
+            status: "success",
+            message : "notes deleted succesfully"
+        })
+    } catch (e) {
+        res.status(500).json({
+            status : "failed",
             message : e.message
         })
     }
